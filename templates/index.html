@@ -1,65 +1,142 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Movie Review</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <style>
-        .login h1{
-            background-color: #151515;
-            color: #fff;
+{% extends 'base.html' %}
 
+{% block content %}
+<style>
+    .movie img {
+        width: 100%;
+        height: auto;
+        max-width: 300px; /* Adjust the maximum width */
+        margin-bottom: 10px;
+    }
+    
+    .movie {
+        display: inline-block;
+        text-align: center;
+        margin: 10px;
+    }
+    
+    .movie a {
+        text-decoration: none;
+        color: wheat;
+    }
+    /* Reviews container styles */
+    .dbs {
+        margin: 20px;
+        padding: 20px;
+        background-color: #333;
+        border-radius: 8px;
+        color: #e0e0e0;
+    }
+    
+    .reviews-container {
+        overflow-y: auto; /* Enable vertical scrolling if needed */
+        max-height: 400px; /* Limit the height of the reviews container */
+    }
+    
+    .reviews-container ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    .reviews-container li {
+        margin-bottom: 15px;
+        padding: 10px;
+        background-color: #4a4343;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    
+    .reviews-container p {
+        margin: 5px 0;
+    }
+    
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+    
+    .btn-primary {
+        background-color: #007bff;
+    }
+    
+    .btn-secondary {
+        background-color: #6c757d;
+    }
+    
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+    
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+</style>
 
-            text-align: center;
-            padding: 1em;
-
-        }
-
-        img{
-            height: 10%;
-
-
-        }
-        button{
-            border: solid black 2px;
-            border-radius: 8px;
-            width: 500px;
-        }
-
-        b{
-            text-align: center;
-            text-transform: capitalize;
-            color: white;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            size: 50px;
-        }
-        body{
-
-            background-image:url("https://preview.redd.it/how-can-someone-make-this-background-with-html-and-css-i-v0-zjgs096khv591.jpg?auto=webp&s=9659527da9196c27a8875200b41d20a8e901c341");
-        }
-        input{
-            width: 500px;
-        }
-    </style>
-</head>
-  <body>
-    <center>
-    <div class = "login">
-        <h1>Sentimental Analysis for Movie Review</h1>
-        <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTznA1Yk_i0ObmevYkk-Glkdu59jaXDUJoRSw5G3pe8q6ZqG0pG" alt="movie pic" style=""  >
-        <h2 style="color:white" >How was the movie</h2>
-            <form action="{{url_for('predict')}}" method="post">
-                <input type="text" name="review" placeholder="review here...." required = "required" width="50px">
-                <br>
-                <button type="submit" class="btn btn-primary btn-block btn-large" style="width: 15%;">Submit</button>
-            </form>
-            <br>
-
-            <b>{{prediction_text}}</b>
-
+<div id="home" class="content text-center mb-4">
+    <h1>Comment Your Experience</h1>
+</div>
+<div id="recommendations" class="container">
+    
+    <div class="movie">
+        <a href="{{ url_for('batman', movie='Batman', img='thebatman.png') }}">
+            <img src="https://images-cdn.ubuy.ae/634d0cc50dae823b9a54f97f-the-batman-movie-poster-i-am-the.jpg" alt="Batman">
+            <br> Batman
+        </a>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</center>
-</body>
-</html>
+    
+    <div class="movie">
+        <a href="{{ url_for('batman', movie='Fight Club', img='bahubali.png') }}">
+            <img src="https://posterspy.com/wp-content/uploads/2017/09/poster-a42.jpg" alt="Fight Club">
+            <br> Fight Club
+        </a>
+    </div>
+
+    <div class="movie">
+        <a href="{{ url_for('batman', movie='Breaking Bad', img='kgf.png') }}">
+            <img src="https://posterspy.com/wp-content/uploads/2024/02/insta-bb.jpg" alt="KGF">
+            <br> Breaking Bad
+        </a>
+    </div>
+    <div class="movie">
+        <a href="{{ url_for('batman', movie='The Boys', img='boys.png') }}">
+            <img src="https://posterspy.com/wp-content/uploads/2024/03/The-Boys-Season-4.jpg" alt="The Boys">
+            <br> The Boys
+        </a>
+    </div>
+    <div class="movie">
+        <a href="{{ url_for('batman', movie='The Wolf of Wall Street', img='dragons.png') }}">
+            <img src="https://w0.peakpx.com/wallpaper/162/771/HD-wallpaper-wolf-of-wall-street-the-wolf-of-wall-street-wall-street-di-caprio.jpg" alt="The Wolf of Wall Street">
+            <br> The Wolf of Wall Street
+        </a>
+    </div>
+</div>
+
+<div id="reviews" class="dbs">
+    <h3>Reviews here</h3>
+    <div class="reviews-container">
+        <ul>
+            {% for review in Reviews %}
+            <li>
+                <p><strong>Movie Name:</strong> {{ review.moivename }}</p>
+                <p><strong>Review:</strong> {{ review.review }}</p>
+                <p><strong>Emotion:</strong> {{ review.emotion }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <a href="{{ url_for('hello_world') }}" class="btn btn-primary mt-3">Back to Home</a>
+    <a href="{{ url_for('suggest_movie') }}" class="btn btn-secondary mt-3">Suggestions</a>
+</div>
+{% endblock %}
